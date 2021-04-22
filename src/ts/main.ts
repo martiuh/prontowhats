@@ -6,7 +6,7 @@
 //   }
 // }
 
-const MEXICO_CODE = 'ES';
+const MEXICO_CODE = 'MX';
 
 window.addEventListener('load', () => {
   let countrySelectValid = false;
