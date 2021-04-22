@@ -1,30 +1,35 @@
 {
-  "name": "tailwindcss-alpinejs-starter",
+  "name": "rapiwhats",
   "version": "1.0.0",
-  "description": "An opinionated starter template based on tainwindCSS, alpine.js, postcss and esbuild.",
+  "description": "Codebase for rapiwhats.com",
   "scripts": {
-    "watch-css": "postcss src/css/main.css -o assets/css/style.css -w",
-    "build-css": "cross-env ENV_BUILD=prod postcss src/css/main.css -o assets/css/style.css",
-    "watch-js": "esbuild src/ts/main.ts --bundle --sourcemap=inline --target=es2016 --outfile=assets/js/main.js --watch",
-    "debug-js": "esbuild src/ts/main.ts --bundle --sourcemap=inline --target=es2016 --outfile=assets/js/main.js --servedir=./",
-    "build-js": "esbuild src/ts/main.ts --bundle --minify --target=es2016 --outfile=assets/js/main.js",
-    "start": "concurrently \"npm:watch-css\" \"npm:watch-js\"",
-    "dev": "concurrently \"npm:watch-css\" \"npm:debug-js\"",
-    "copy": "copyfiles index.html \"assets/**/*\" dist",
-    "deploy": "npm run build-css && npm run build-js && npm run copy"
+    "watch-css": "postcss src/css/main.css -o dist/css/style.css -w",
+    "build-css": "cross-env ENV_BUILD=prod postcss src/css/main.css -o dist/css/style.css",
+    "watch-js": "esbuild src/ts/main.ts --bundle --sourcemap=inline --target=es2016 --outfile=dist/js/main.js --watch",
+    "debug-js": "esbuild src/ts/main.ts --bundle --sourcemap=inline --target=es2016 --outfile=dist/js/main.js --servedir=./",
+    "build-js": "esbuild src/ts/main.ts --bundle --minify --target=es2016 --outfile=dist/js/main.js",
+    "watch-pug": "rimraf dist/index.html && pug src/pug/index.pug -o dist --watch",
+    "build-pug": "rimraf dist/index.html && pug src/pug/index.pug -o dist",
+    "start": "concurrently \"npm:watch-css\" \"npm:watch-js\" \"npm:watch-pug\" ",
+    "dev": "concurrently \"npm:watch-css\" \"npm:debug-js\" \" npm:watch-pug\" ",
+    "build": "npm run build-css && npm run build-js && npm run build-pug",
+    "vercel-build": "npm run build",
+    "make:countries-list": "node scripts/createCountriesList.js"
   },
-  "author": "Konstantinos Zagoris",
-  "license": "ISC",
+  "author": "Tonatiuh González <martiuh@gmail.com>",
+  "license": "MIT",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.1",
     "alpinejs": "^2.8.0",
+    "esbuild-runner": "^1.3.2",
+    "pug-cli": "^1.0.0-alpha6",
     "tailwindcss": "^2.0.3"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^4.0.0",
     "autoprefixer": "^10.0.1",
+    "chokidar": "^3.5.1",
     "concurrently": "^5.3.0",
-    "copyfiles": "^2.4.0",
     "cross-env": "^7.0.2",
     "cssnano": "^4.1.10",
     "esbuild": "^0.8.46",
@@ -32,6 +37,7 @@
     "postcss-cli": "^8.1.0",
     "postcss-copy": "^7.1.0",
     "postcss-import": "^14.0.0",
+    "rimraf": "^3.0.2",
     "typescript": "^4.0.3"
   }
 }

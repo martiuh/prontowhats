@@ -1,0 +1,14 @@
+div(class="w-full max-w-xs mx-auto pt-6")
+    form#send-form(class="bg-gray-200 shadow-lg rounded px-8 pt-6 pb-8 mb-4" x-data="formatUrl")
+        div.mb-4
+            label(for="country" class="block text-grey-darkest text-sm font-bold mb-3") País*
+            select#country(class="block appearance-none w-full bg-gray-100 border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-black focus:bg-white focus:border-grey" required)
+                include ./countries.pug
+            
+        div.mb-4
+            label(for="tel" class="block text-grey-darkest text-sm font-bold mb-3") Teléfono*
+            input#tel(type="tel" pattern="[0-9]{10,15}" class="shadow appearance-none bg-gray-100 border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-black focus:shadow-outline" required)
+        div.mb-4
+            label(for="message" class="block text-grey-darkest text-sm font-bold mb-3") Mensaje (opcional)
+            textarea#message(class="shadow appearance-none resize-none bg-gray-100 border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-black focus:shadow-outline h-24") 
+        button#submit-btn(class="rounded bg-green-700 text-white font-bold focus:outline-black p-2 w-40 disabled:opacity-50 disabled:cursor-not-allowed") Enviar

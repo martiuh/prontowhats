@@ -1,0 +1,16 @@
+doctype html
+html(lang="es-MX")
+    meta(charset="utf-8")
+    title="Whatsveloz - Manda Whatsapp sin registrar"
+    meta(name="viewport" content="width=device-width, initla-scale=1")
+    meta(name="theme-color" content="#000000")
+    link(rel="short icon" href="img/favicon.ico")
+    link(rel="apple-touch-icon" size="76x76" href="img/apple-icon.png")
+    link(type="text/css" href="css/style.css" rel="stylesheet")
+body.h-screen.max-h-screen.max-w-screen.w-screen.bg-green-300
+    include includes/nav.pug
+    main
+        .pt-6.px-2 
+            h1.text-center.text-3xl.font-bold Manda Whatsapp sin registrar número
+            include includes/form.pug
+    script(type="application/javascript" src="js/main.js")

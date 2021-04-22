@@ -1,5 +1,4 @@
 node_modules
-assets/css
-assets/webfonts
-assets/js
-dist/
+dist
+
+.vercel
