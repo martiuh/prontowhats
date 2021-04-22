@@ -69,7 +69,8 @@ window.addEventListener('load', () => {
     event.preventDefault();
     const countryCode = countrySelect.selectedOptions[0].dataset.code;
     const telephone = telInput.value;
-    const msg = document.getElementById('message');
+    const msg = (document.getElementById('message') as HTMLTextAreaElement)
+      .value;
 
     const hasMsg = msg ? `&text=${encodeURI(`${msg}`)}` : '';
 
