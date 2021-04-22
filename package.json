@@ -12,8 +12,7 @@
     "build-pug": "rimraf dist/index.html && pug src/pug/index.pug -o dist",
     "start": "concurrently \"npm:watch-css\" \"npm:watch-js\" \"npm:watch-pug\" ",
     "dev": "concurrently \"npm:watch-css\" \"npm:debug-js\" \" npm:watch-pug\" ",
-    "build": "npm run build-css && npm run build-js && npm run build-pug",
-    "vercel-build": "npm run build",
+    "build": "npm run build-pug && npm run build-js && npm run build-css ",
     "make:countries-list": "node scripts/createCountriesList.js"
   },
   "author": "Tonatiuh González <martiuh@gmail.com>",
