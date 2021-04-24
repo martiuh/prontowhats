@@ -1,4 +1,4 @@
-# Whatsveloz - Envía mensajes de Whatsapp sin registrar al usuario
+# Prontowhats - Envía mensajes de Whatsapp sin registrar al usuario
 
 ## Development
 
