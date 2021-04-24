@@ -7,10 +7,17 @@ html(lang="es-MX")
     link(rel="short icon" href="img/favicon.ico")
     link(rel="apple-touch-icon" size="76x76" href="img/apple-icon.png")
     link(type="text/css" href="css/style.css" rel="stylesheet")
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    script(src="https://www.googletagmanager.com/gtag/js?id=G-ZJ9PJH971D" async)
+    script.
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-ZJ9PJH971D');
 body.h-screen.max-h-screen.max-w-screen.w-screen.bg-green-300
     include includes/nav.pug
     main
         .pt-6.px-2 
-            h1.text-center.text-3xl.font-bold Manda Whatsapp sin registrar número
+            h1.text-center.text-3xl.font-bold Manda Whatsapp sin registrar el número en tus contactos.
             include includes/form.pug
     script(type="application/javascript" src="js/main.js")
