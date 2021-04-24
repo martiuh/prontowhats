@@ -6,8 +6,6 @@
 //   }
 // }
 
-const MEXICO_CODE = 'MX';
-
 window.addEventListener('load', () => {
   let countrySelectValid = false;
   let telInputValid = false;
@@ -29,7 +27,7 @@ window.addEventListener('load', () => {
         countrySelect.value = code;
       }
     } catch (error) {
-      countrySelect.value = MEXICO_CODE;
+      console.error('Error fetching IP information');
     }
   })();
 
@@ -72,9 +70,11 @@ window.addEventListener('load', () => {
     const msg = (document.getElementById('message') as HTMLTextAreaElement)
       .value;
 
-    const hasMsg = msg ? `&text=${encodeURI(`${msg}`)}` : '';
+    const hasMsg = msg !== ' ' ? `&text=${encodeURI(`${msg}`)}` : '';
 
-    window.location.href = `https://api.whatsapp.com/send?phone=${countryCode}${telephone}${hasMsg}`;
+    const whatsAppString = `https://api.whatsapp.com/send?phone=${countryCode}${telephone}${hasMsg}`;
+
+    window.location.href = whatsAppString;
   });
 
   sendWhatsForm.addEventListener('change', () => {
