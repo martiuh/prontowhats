@@ -18,7 +18,7 @@ function createOption(country) {
   const { code, dial_code } = country;
   const name = country.name_es;
 
-  return `option(value="${code}" data-code="${dial_code}") ${name} (${dial_code}) 
+  return `option(value="${code}" data-code="${dial_code}" data-name="${name}") ${name} (${dial_code}) 
   <span aria-hidden="true"> ${createEmoji(code)} </span>
    `;
 }

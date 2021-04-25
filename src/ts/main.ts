@@ -71,6 +71,8 @@ window.addEventListener('load', () => {
     event.preventDefault();
 
     const countryCode = countrySelect.selectedOptions[0].dataset.code;
+    const countryName = countrySelect.selectedOptions[0].dataset.name;
+
     const telephone = telInput.value;
     const msg = messageArea.value;
 
@@ -78,16 +80,19 @@ window.addEventListener('load', () => {
     const message = hasMsg ? `&text=${encodeURI(`${msg}`)}` : '';
 
     if (hasMsg) {
-      track('select_content', { label: 'with_message' });
+      track('select_content', {
+        content_type: 'with_message',
+        item_id: '1111',
+      });
     }
 
     const whatsAppString = `https://api.whatsapp.com/send?phone=${countryCode}${telephone}${message}`;
 
-    track('select_content', { label: 'country', value: countryCode });
+    track('select_content', { content_type: 'country', item_id: countryName });
 
     if (typeof DEV_SEND_MESSAGE !== 'undefined') {
-      if (DEV_SEND_MESSAGE === false) {
-        console.log('Send', whatsAppString);
+      if (!DEV_SEND_MESSAGE) {
+        console.log('SEND', whatsAppString);
         return;
       }
     }
