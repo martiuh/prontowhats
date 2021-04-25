@@ -5,9 +5,9 @@
   "scripts": {
     "watch-css": "postcss src/css/main.css -o dist/css/style.css -w",
     "build-css": "cross-env ENV_BUILD=prod postcss src/css/main.css -o dist/css/style.css",
-    "watch-js": "esbuild src/ts/main.ts --bundle --sourcemap=inline --target=es2016 --outfile=dist/js/main.js --define:DEV_SEND_MESSAGE=false --watch",
-    "debug-js": "esbuild src/ts/main.ts --bundle --sourcemap=inline --target=es2016 --outfile=dist/js/main.js --servedir=./",
-    "build-js": "esbuild src/ts/main.ts --bundle --minify --target=es2016 --outfile=dist/js/main.js",
+    "watch-js": "esbuild src/ts/main.ts --bundle --sourcemap=inline --target=es2016 --outfile=dist/js/main.js --define:SEND_MESSAGE=false --watch",
+    "debug-js": "esbuild src/ts/main.ts --bundle --sourcemap=inline --target=es2016 --outfile=dist/js/main.js --define:SEND_MESSAGE=false --servedir=./",
+    "build-js": "esbuild src/ts/main.ts --bundle --minify --target=es2016 --outfile=dist/js/main.js --define:SEND_MESSAGE=true",
     "watch-pug": "rimraf dist/index.html && pug src/pug/index.pug -o dist --watch",
     "build-pug": "rimraf dist/index.html && pug src/pug/index.pug -o dist",
     "watch-public": "npm run build-public --watch",

@@ -2,7 +2,7 @@ import { GTag } from '@types/gtag.js';
 import { isDevEnv } from '@utils/isDevEnv';
 
 declare const gtag: GTag;
-declare var DEV_SEND_MESSAGE: boolean;
+declare var SEND_MESSAGE: boolean;
 
 type GActions = string;
 type GCategories = 'engagement';
@@ -26,11 +26,6 @@ export function track(action: GActions, options: ActionOptions) {
     ...(typeof moreOptions !== 'undefined' ? moreOptions : {}),
   };
 
-  const {
-    defined: definedDevSendMessage,
-    value: devSendMessageValue,
-  } = isDevEnv(DEV_SEND_MESSAGE);
-
   const sendEvent = () =>
     gtag('event', action, {
       event_category: category,
@@ -39,12 +34,8 @@ export function track(action: GActions, options: ActionOptions) {
 
   const hasGtag = typeof gtag === 'function';
 
-  if (hasGtag || !definedDevSendMessage) {
+  if (hasGtag || SEND_MESSAGE) {
     sendEvent();
-  } else if (hasGtag || definedDevSendMessage) {
-    if (devSendMessageValue) {
-      sendEvent();
-    }
   }
 
   console.log('[track]', action, trackOptions);

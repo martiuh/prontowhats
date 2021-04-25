@@ -1,6 +1,6 @@
 import { track } from '@lib/track';
 
-declare var DEV_SEND_MESSAGE: boolean;
+declare var SEND_MESSAGE: boolean;
 
 window.addEventListener('load', () => {
   let countrySelectValid = false;
@@ -90,11 +90,9 @@ window.addEventListener('load', () => {
 
     track('select_content', { content_type: 'country', item_id: countryName });
 
-    if (typeof DEV_SEND_MESSAGE !== 'undefined') {
-      if (!DEV_SEND_MESSAGE) {
-        console.log('SEND', whatsAppString);
-        return;
-      }
+    if (!SEND_MESSAGE) {
+      console.log('SEND', whatsAppString);
+      return;
     }
 
     window.location.href = whatsAppString;
