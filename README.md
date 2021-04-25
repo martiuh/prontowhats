@@ -12,6 +12,10 @@ During the development (for the watch mode) use:
 npm start
 ```
 
+### Environment Variables
+
+Takea look at `.env.example` to know what kind of variables you can use, some are not required
+
 For deployment, run:
 
 ```shell

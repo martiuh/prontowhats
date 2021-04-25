@@ -1,3 +1,6 @@
+
+- const gtag = process.env.GTAG; 
+
 doctype html
 html(lang="es-MX")
     meta(charset="utf-8")
@@ -7,13 +10,14 @@ html(lang="es-MX")
     link(rel="short icon" href="img/favicon.ico")
     link(rel="apple-touch-icon" size="76x76" href="img/apple-icon.png")
     link(type="text/css" href="css/style.css" rel="stylesheet")
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    script(src="https://www.googletagmanager.com/gtag/js?id=G-ZJ9PJH971D" async)
-    script.
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-ZJ9PJH971D');
+    if typeof gtag === 'string'
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        script(src=`https://www.googletagmanager.com/gtag/js?id=${gtag}` async)
+        script.
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '#{gtag}');
 body.h-screen.max-h-screen.max-w-screen.w-screen.bg-green-300
     include includes/nav.pug
     main

@@ -1,10 +1,6 @@
-// import 'alpinejs';
+import { track } from '@lib/track';
 
-// declare global {
-//   interface Window {
-//     formatUrl: typeof formatUrl;
-//   }
-// }
+declare var DEV_SEND_MESSAGE: boolean;
 
 window.addEventListener('load', () => {
   let countrySelectValid = false;
@@ -63,22 +59,43 @@ window.addEventListener('load', () => {
     'submit-btn'
   ) as HTMLButtonElement;
 
+  const messageArea = document.getElementById('message') as HTMLTextAreaElement;
+
+  messageArea.addEventListener('keydown', (event) => {
+    if ((event.ctrlKey || event.metaKey) && event.code === 'Enter') {
+      submitButton.click();
+    }
+  });
+
   sendWhatsForm.addEventListener('submit', (event) => {
     event.preventDefault();
+
     const countryCode = countrySelect.selectedOptions[0].dataset.code;
     const telephone = telInput.value;
-    const msg = (document.getElementById('message') as HTMLTextAreaElement)
-      .value;
+    const msg = messageArea.value;
 
-    const hasMsg = msg !== ' ' ? `&text=${encodeURI(`${msg}`)}` : '';
+    const hasMsg = msg !== ' ';
+    const message = hasMsg ? `&text=${encodeURI(`${msg}`)}` : '';
 
-    const whatsAppString = `https://api.whatsapp.com/send?phone=${countryCode}${telephone}${hasMsg}`;
+    if (hasMsg) {
+      track('select_content', { label: 'with_message' });
+    }
+
+    const whatsAppString = `https://api.whatsapp.com/send?phone=${countryCode}${telephone}${message}`;
+
+    track('select_content', { label: 'country', value: countryCode });
+
+    if (typeof DEV_SEND_MESSAGE !== 'undefined') {
+      if (DEV_SEND_MESSAGE === false) {
+        console.log('Send', whatsAppString);
+        return;
+      }
+    }
 
     window.location.href = whatsAppString;
   });
 
   sendWhatsForm.addEventListener('change', () => {
-    console.log({ telInputValid, countrySelectValid });
     if (telInputValid && countrySelectValid) {
       submitButton.removeAttribute('disabled');
     }
