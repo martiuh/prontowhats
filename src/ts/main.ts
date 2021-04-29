@@ -1,4 +1,5 @@
-import { track } from '@lib/track';
+import { track } from '@/lib/track';
+import { extendTelField } from '@/extenders/smartPaste/extendTelField';
 
 declare var SEND_MESSAGE: boolean;
 
@@ -27,32 +28,8 @@ window.addEventListener('load', () => {
     }
   })();
 
-  const errorClasses = ['border-2', 'border-red-500', 'text-red-500'];
-
-  const addErrorClasses = (el: HTMLElement) =>
-    el.classList.add(...errorClasses);
-
-  const removeErrorClasses = (el: HTMLElement) => {
-    if (el.classList.contains(errorClasses[1])) {
-      el.classList.remove(...errorClasses);
-    }
-  };
-
   const telInput = document.getElementById('tel') as HTMLInputElement;
-
-  telInput.addEventListener('blur', (e) => {
-    if (!telInput.checkValidity()) {
-      addErrorClasses(telInput);
-      telInputValid = false;
-    } else {
-      removeErrorClasses(telInput);
-      telInputValid = true;
-    }
-  });
-
-  telInput.addEventListener('focus', () => {
-    removeErrorClasses(telInput);
-  });
+  extendTelField(telInput);
 
   const sendWhatsForm = document.getElementById('send-form') as HTMLFormElement;
   const submitButton = document.getElementById(

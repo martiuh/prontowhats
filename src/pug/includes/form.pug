@@ -7,7 +7,7 @@ div(class="w-full max-w-xs mx-auto pt-6")
             
         div.mb-4
             label(for="tel" class="block text-grey-darkest text-sm font-bold mb-3") Teléfono*
-            input#tel(type="tel" pattern="[0-9]{10,15}" class="shadow appearance-none bg-gray-100 border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-black focus:shadow-outline" required)
+            input#tel(type="tel" pattern="[0-9]{10,15}" class="shadow appearance-none bg-gray-100 border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-black focus:shadow-outline" required data-testid="tel-input")
         div.mb-4
             label(for="message" class="block text-grey-darkest text-sm font-bold mb-3") Mensaje (opcional)
             textarea#message(class="shadow appearance-none resize-none bg-gray-100 border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-black focus:shadow-outline h-24") 

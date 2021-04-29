@@ -36,6 +36,7 @@ export function track(action: GActions, options: ActionOptions) {
 
   if (hasGtag || SEND_MESSAGE) {
     sendEvent();
+    return;
   }
 
   console.log('[track]', action, trackOptions);
