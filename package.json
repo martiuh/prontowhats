@@ -37,6 +37,7 @@
     "@types/jest": "^26.0.23",
     "@types/pug": "^2.0.4",
     "autoprefixer": "^10.0.1",
+    "browser-sync": "^2.27.7",
     "chokidar": "^3.5.1",
     "concurrently": "^5.3.0",
     "copyfiles": "^2.4.1",
