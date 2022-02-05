@@ -3,4 +3,7 @@ Hello fellow human!
 My name is Tonatiuh González and I'm the creator of prontowhats.com if you want to get in touch with me
 you can reach me @martiuh in Twitter.
 
+Hi my name is Mauricio Medrano and I am an up and coming programmer
+who also happens to be the nephew of the aforementioned human.
+
 Font Family is Inter by https://github.com/rsms/inter/
