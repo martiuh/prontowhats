@@ -31,6 +31,27 @@ window.addEventListener('load', () => {
   const telInput = document.getElementById('tel') as HTMLInputElement;
   extendTelField(telInput);
 
+  const infoButton = document.getElementById('info-btn') as HTMLButtonElement;
+  const priceButton = document.getElementById('price-btn') as HTMLButtonElement;
+  const randomButton = document.getElementById('random-sentence-btn') as HTMLButtonElement;
+
+  infoButton.addEventListener('click', () => {
+    messageArea.textContent = 'Me interesa recibir informes de '
+  })
+
+  priceButton.addEventListener('click', () => {
+    messageArea.textContent = 'Me gustaria saber el precio de '
+  })
+
+  randomButton.addEventListener('click', () => {
+    let result = randomSentences[getRrandomNum(randomSentences.length)]
+    messageArea.textContent = `${result}`
+  })
+
+ function getRrandomNum(num: number) {
+  return Math.floor(Math.random() * (num) );
+}
+
   const sendWhatsForm = document.getElementById('send-form') as HTMLFormElement;
   const submitButton = document.getElementById(
     'submit-btn'
@@ -81,3 +102,20 @@ window.addEventListener('load', () => {
     }
   });
 });
+
+
+const randomSentences = ["Las mentiras crudas desfilan a más ver la prevención",
+                         "Las cargas largas fundamentan a muerte la evolución",
+                         "Las réplicas vagas adivinan de mil amores la sugerencia",
+                         "Las bandejas inversas arrecian a plomo la obra",
+                         "Las catedrales poéticas retratan primero la psicología evolutiva",
+                         "Las plantillas domésticas retrasan consecutio temporum la denominación social",
+                         "Las movilidades tiesas prescinden bóbilis bóbilis la economía política",
+                         "Las pérdidas ácidas cuadran al cien por cien la viuda",
+                         "Las cicatrices pacíficas toman luego la corteza cerebral",
+                         "El billón frustra todo banco central europeo",
+                         "El bautizo desmiente otro agente",
+                         "El material teje mismísimo tema",
+                         "Comprometeré nuestro fraude decorativo",
+                         "Intuiré nuestro perjuicio tibio",
+                         "Palparé nuestro mostrador pirenaico"]
