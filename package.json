@@ -11,7 +11,7 @@
     "watch-pug": "rimraf dist/index.html && pug src/pug/index.pug -o dist --watch",
     "build-pug": "rimraf dist/index.html && pug src/pug/index.pug -o dist",
     "watch-public": "npm run build-public --watch",
-    "build-public": "cpx \"public/*\" dist",
+    "build-public": "cpx \"public/**/*\" dist",
     "sync": "browser-sync start --server dist/ --files src/*",
     "start": "concurrently \"npm:watch-css\" \"npm:watch-js\" \"npm:watch-pug\" \"npm:watch-public\" \"npm:sync\"",
     "dev": "concurrently \"npm:watch-css\" \"npm:debug-js\" \" npm:watch-pug\" ",
