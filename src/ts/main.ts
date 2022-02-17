@@ -1,5 +1,6 @@
 import { track } from '@/lib/track';
 import { extendTelField } from '@/extenders/smartPaste/extendTelField';
+import { randomSentences } from '@/constants/sentences'
 
 declare var SEND_MESSAGE: boolean;
 
@@ -104,18 +105,3 @@ window.addEventListener('load', () => {
 });
 
 
-const randomSentences = ["Las mentiras crudas desfilan a más ver la prevención",
-                         "Las cargas largas fundamentan a muerte la evolución",
-                         "Las réplicas vagas adivinan de mil amores la sugerencia",
-                         "Las bandejas inversas arrecian a plomo la obra",
-                         "Las catedrales poéticas retratan primero la psicología evolutiva",
-                         "Las plantillas domésticas retrasan consecutio temporum la denominación social",
-                         "Las movilidades tiesas prescinden bóbilis bóbilis la economía política",
-                         "Las pérdidas ácidas cuadran al cien por cien la viuda",
-                         "Las cicatrices pacíficas toman luego la corteza cerebral",
-                         "El billón frustra todo banco central europeo",
-                         "El bautizo desmiente otro agente",
-                         "El material teje mismísimo tema",
-                         "Comprometeré nuestro fraude decorativo",
-                         "Intuiré nuestro perjuicio tibio",
-                         "Palparé nuestro mostrador pirenaico"]
