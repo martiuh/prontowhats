@@ -1,5 +1,6 @@
 import { track } from '@/lib/track';
 import { extendTelField } from '@/extenders/smartPaste/extendTelField';
+import { randomSentences } from '@/constants/sentences'
 
 declare var SEND_MESSAGE: boolean;
 
@@ -30,6 +31,27 @@ window.addEventListener('load', () => {
 
   const telInput = document.getElementById('tel') as HTMLInputElement;
   extendTelField(telInput);
+
+  const infoButton = document.getElementById('info-btn') as HTMLButtonElement;
+  const priceButton = document.getElementById('price-btn') as HTMLButtonElement;
+  const randomButton = document.getElementById('random-sentence-btn') as HTMLButtonElement;
+
+  infoButton.addEventListener('click', () => {
+    messageArea.textContent = 'Me interesa recibir informes de '
+  })
+
+  priceButton.addEventListener('click', () => {
+    messageArea.textContent = 'Me gustaria saber el precio de '
+  })
+
+  randomButton.addEventListener('click', () => {
+    let result = randomSentences[getRrandomNum(randomSentences.length)]
+    messageArea.textContent = `${result}`
+  })
+
+ function getRrandomNum(num: number) {
+  return Math.floor(Math.random() * (num) );
+}
 
   const sendWhatsForm = document.getElementById('send-form') as HTMLFormElement;
   const submitButton = document.getElementById(
@@ -81,3 +103,5 @@ window.addEventListener('load', () => {
     }
   });
 });
+
+
