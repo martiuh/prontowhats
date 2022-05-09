@@ -54,7 +54,7 @@ window.addEventListener('load', () => {
     const msg = messageArea.value;
 
     const hasMsg = msg !== ' ';
-    const message = hasMsg ? `&text=${encodeURI(`${msg}`)}` : '';
+    const message = hasMsg ? `?text=${encodeURI(`${msg}`)}` : '';
 
     if (hasMsg) {
       track('select_content', {
@@ -63,7 +63,7 @@ window.addEventListener('load', () => {
       });
     }
 
-    const whatsAppString = `https://api.whatsapp.com/send?phone=${countryCode}${telephone}${message}`;
+    const whatsAppString = `https://wa.me/${countryCode}${telephone}/${message}`;
 
     track('select_content', { content_type: 'country', item_id: countryName });
 
