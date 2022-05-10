@@ -1,11 +1,11 @@
-import { GTag } from '@types/gtag.js';
-import { isDevEnv } from '@utils/isDevEnv';
+import { GTag } from "@types/gtag.js";
+import { isDevEnv } from "@utils/isDevEnv";
 
 declare const gtag: GTag;
 declare var SEND_MESSAGE: boolean;
 
 type GActions = string;
-type GCategories = 'engagement';
+type GCategories = "engagement";
 
 interface ActionOptions {
   category?: GCategories;
@@ -14,30 +14,30 @@ interface ActionOptions {
   [x: string]: any;
 }
 
+const hasGtag = typeof gtag === "function";
+
 /**
  * Track Google Tag Events
  */
 export function track(action: GActions, options: ActionOptions) {
-  const { category = 'engagement', label, value, ...moreOptions } = options;
+  const { category = "engagement", label, value, ...moreOptions } = options;
 
   const trackOptions = {
-    ...(typeof label !== 'undefined' ? { event_label: label } : {}),
-    ...(typeof value !== 'undefined' ? { value } : {}),
-    ...(typeof moreOptions !== 'undefined' ? moreOptions : {}),
+    ...(typeof label !== "undefined" ? { event_label: label } : {}),
+    ...(typeof value !== "undefined" ? { value } : {}),
+    ...(typeof moreOptions !== "undefined" ? moreOptions : {}),
   };
 
   const sendEvent = () =>
-    gtag('event', action, {
+    gtag("event", action, {
       event_category: category,
       ...trackOptions,
     });
 
-  const hasGtag = typeof gtag === 'function';
-
-  if (hasGtag || SEND_MESSAGE) {
+  if (hasGtag && SEND_MESSAGE) {
     sendEvent();
     return;
   }
 
-  console.log('[track]', action, trackOptions);
+  console.log("[track]", action, trackOptions);
 }
