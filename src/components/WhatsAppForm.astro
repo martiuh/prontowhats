@@ -1,0 +1,52 @@
+---
+// WhatsApp form component converted from form.pug
+import CountrySelect from "./CountrySelect.astro";
+---
+
+<div class="w-full max-w-xs pt-6">
+  <form
+    id="send-form"
+    class="bg-gray-200 shadow-lg rounded px-8 pt-6 pb-8 mb-4"
+  >
+    <div class="mb-4">
+      <label
+        for="country"
+        class="block text-grey-darkest text-sm font-bold mb-3">País*</label
+      >
+      <CountrySelect />
+    </div>
+
+    <div class="mb-4">
+      <label for="tel" class="block text-grey-darkest text-sm font-bold mb-3"
+        >Teléfono*</label
+      >
+      <input
+        id="tel"
+        type="tel"
+        pattern="[0-9]{10,15}"
+        class="shadow appearance-none bg-gray-100 border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-black focus:shadow-outline"
+        required
+        data-testid="tel-input"
+      />
+    </div>
+
+    <div class="mb-4">
+      <label
+        for="message"
+        class="block text-grey-darkest text-sm font-bold mb-3"
+        >Mensaje (opcional)</label
+      >
+      <textarea
+        id="message"
+        class="shadow appearance-none resize-none bg-gray-100 border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-black focus:shadow-outline h-24"
+      ></textarea>
+    </div>
+
+    <button
+      id="submit-btn"
+      class="rounded bg-emerald-700 text-white font-bold focus:outline-black p-2 w-40 disabled:opacity-50 disabled:cursor-not-allowed"
+    >
+      Enviar
+    </button>
+  </form>
+</div>
