@@ -1,0 +1,20 @@
+---
+// Country select component converted from countries.pug
+import countryData from '../json/country-codes.json';
+
+// Country code to flag emoji mapping
+const getFlag = (countryCode: string): string => {
+  return countryCode.toUpperCase().replace(/./g, char => 
+    String.fromCodePoint(127397 + char.charCodeAt(0))
+  );
+};
+---
+
+<select id="country" class="block appearance-none w-full bg-gray-100 border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-black focus:bg-white focus:border-grey" required>
+  <option value="" disabled selected>Selecciona código de país</option>
+  {countryData.countries.map((country) => (
+    <option value={country.code} data-code={country.dial_code} data-name={country.name_es}>
+      {country.name_es} ({country.dial_code}) <span aria-hidden="true"> {getFlag(country.code)} </span>
+    </option>
+  ))}
+</select>

@@ -1,5 +1,4 @@
-import { GTag } from "@types/gtag.js";
-import { isDevEnv } from "@utils/isDevEnv";
+import type { GTag } from "@types/gtag.js";
 
 declare const gtag: GTag;
 declare var SEND_MESSAGE: boolean;

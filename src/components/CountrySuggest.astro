@@ -1,0 +1,94 @@
+---
+// Country suggestion buttons component
+---
+
+<div
+  id="country-suggest-container"
+  class="overflow-hidden transition-all duration-300 ease-out"
+  style="max-height: 0;"
+>
+  <div
+    id="country-suggest-buttons"
+    class="flex gap-2 mb-4 opacity-0 transform translate-y-2 transition-all duration-300 ease-out"
+  >
+  </div>
+</div>
+
+<script>
+  import { getFlag } from "@/lib/countries";
+  import { countryCodes, type CountryData } from "@/lib/stores/country-codes";
+
+  const container = document.getElementById(
+    "country-suggest-container"
+  ) as HTMLElement;
+  const buttonsContainer = document.getElementById(
+    "country-suggest-buttons"
+  ) as HTMLElement;
+  const telInput = document.getElementById("tel") as HTMLInputElement;
+
+  function makeCountry(country: CountryData) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className =
+      "country-suggest-btn inline-flex items-center gap-2 px-3 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-md border border-gray-200 transition-colors duration-200 text-sm font-medium";
+    button.dataset.dialCode = country.dial_code;
+    button.dataset.countryCode = country.code;
+
+    const flagSpan = document.createElement("span");
+    flagSpan.className = "text-lg";
+    flagSpan.textContent = getFlag(country.code);
+
+    const dialCodeSpan = document.createElement("span");
+    dialCodeSpan.textContent = country.dial_code;
+
+    button.appendChild(flagSpan);
+    button.appendChild(dialCodeSpan);
+
+    button.addEventListener("click", () => {
+      const telInputValue = telInput.value;
+      telInput.value = telInputValue.replace(country.dial_code, "");
+      const focusEvent = new Event("focus", {});
+      telInput.dispatchEvent(focusEvent);
+      hideCountrySuggestions();
+    });
+
+    return button;
+  }
+
+  export function showCountrySuggestions(countries: CountryData[]) {
+    const countriesHTMLButtons = countries.map(makeCountry);
+    buttonsContainer.append(...countriesHTMLButtons);
+
+    requestAnimationFrame(() => {
+      container.style.maxHeight = "80px";
+      setTimeout(() => {
+        buttonsContainer.style.opacity = "1";
+        buttonsContainer.style.transform = "translate(0)";
+      }, 150);
+    });
+  }
+
+  export function hideCountrySuggestions() {
+    buttonsContainer.style.opacity = "0";
+    buttonsContainer.style.transform = "translateY(8px)";
+    buttonsContainer.innerHTML = "";
+
+    setTimeout(() => {
+      container.style.maxHeight = "0";
+    }, 150);
+  }
+
+  document.addEventListener("GUESS_DIAL_CODES", async (event) => {
+    const detail: string[] = (event as CustomEvent).detail;
+    const results = await Promise.allSettled(
+      detail.map((code) => countryCodes.getCountryByDialCode(code))
+    );
+    const validCountries = results
+      .map((r) => r.status === "fulfilled" && r.value)
+      .filter((r) => r !== false && r !== null);
+
+    if (validCountries.length > 0) {
+      return showCountrySuggestions(validCountries);
+    }
+  });
+</script>

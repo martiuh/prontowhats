@@ -3,14 +3,11 @@ module.exports = {
   transform: {
     '^.+\\.ts$': 'ts-jest',
   },
-  globals: {
-    'ts-jest': {
-      tsconfig: '<rootDir>/tsconfig.json',
-    },
-  },
   testEnvironment: 'jsdom',
   moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/$1',
+    '^@/(.*)$': '<rootDir>/src/$1',
   },
   modulePathIgnorePatterns: ['/node_modules/'],
+  rootDir: '../..',
+  testMatch: ['<rootDir>/src/**/*.test.ts'],
 };

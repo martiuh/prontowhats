@@ -1,0 +1,31 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navigation from "../components/Navigation.astro";
+import WhatsAppForm from "../components/WhatsAppForm.astro";
+
+// Get gtag from environment variable if available
+const gtag = process.env.GTAG;
+---
+
+<Layout title="Prontowhats - Manda Whatsapp sin registrar" gtag={gtag}>
+  <Navigation />
+  <main>
+    <div class="pt-10 px-2 flex flex-col items-center">
+      <h1 class="text-center text-3xl font-bold">
+        Manda Whatsapp sin registrar el número en tus contactos.
+      </h1>
+      <WhatsAppForm />
+      <a
+        class="underline text-emerald-900"
+        href="https://docs.google.com/forms/d/e/1FAIpQLSdXvSmaij_f5XdVjgWFY7Dt8gHP1dwzckqB9fphmvpqOMuqew/viewform?usp=sf_link"
+      >
+        ¿Tienes alguna duda o sugerencia?
+      </a>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  // Import and run the main functionality
+  import "../lib/main.ts";
+</script>

@@ -1,0 +1,38 @@
+---
+import "../styles/main.css";
+
+export interface Props {
+  title: string;
+  gtag?: string | undefined;
+}
+
+const { title, gtag } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es-MX">
+  <head>
+    <meta charset="utf-8" />
+    <title>{title}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="short icon" href="/assets/img/smartphone-icon.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon.png" />
+    
+    {gtag && (
+      <>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script src={`https://www.googletagmanager.com/gtag/js?id=${gtag}`} async></script>
+        <script is:inline define:vars={{ gtag }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', gtag);
+        </script>
+      </>
+    )}
+  </head>
+  <body class="h-screen max-h-screen max-w-screen w-screen bg-emerald-300">
+    <slot />
+  </body>
+</html>
