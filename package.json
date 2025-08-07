@@ -8,7 +8,6 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "make:countries-list": "node scripts/createCountriesList.js",
     "test": "jest --config='src/ts/jest.config.js'",
     "test:w": "npm run test -- --watch"
   },
