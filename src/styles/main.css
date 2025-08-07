@@ -1,12 +1,19 @@
 @import "@fortawesome/fontawesome-free/css/all.min.css";
+@import "tailwindcss";
 
-@import "tailwindcss/base";
+@theme {
+  --font-sans: "Inter", system-ui;
+}
 
-@import "tailwindcss/components";
+/* Thanks rsms for the amazing https://github.com/rsms/inter/*/
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Bold.woff2");
+  font-weight: bold;
+}
 
-@import "tailwindcss/utilities";
-
-
-/*! purgecss start ignore */
-@import "./site.css";
-/*! purgecss end ignore */
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Regular.woff");
+  font-weight: normal;
+}

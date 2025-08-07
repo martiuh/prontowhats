@@ -1,40 +1,44 @@
 export interface SmartPaste {
   formatted: string;
-  country_code: string | null;
+  dial_code_subsets: string[];
+}
+
+function getDialCodeSubsets(digits: string): string[] {
+  const subsets: string[] = [];
+
+  // Generate subsets up to 5 digits (longest dial codes) or the length of input
+  const maxLength = Math.min(digits.length, 4);
+
+  for (let i = 1; i <= maxLength; i++) {
+    subsets.push("+" + digits.substring(0, i));
+  }
+
+  return subsets;
+}
+
+function replaceAll(str: string, find: string | RegExp, replace: string) {
+  return str.replace(new RegExp(find, "g"), replace);
 }
 
 export function smartPaste(text: string): SmartPaste {
   if (/-*/.test(text)) {
-    text = replaceAll(text, '-', '');
+    text = replaceAll(text, "-", "");
   }
 
   if (/\s/.test(text)) {
-    text = replaceAll(text, ' ', '');
+    text = replaceAll(text, " ", "");
   }
 
-  // Let's cover these two examples
-  // source: https://www.oreilly.com/library/view/regular-expressions-cookbook/9781449327453/ch04s03.html
-  const hasValidCountryCode = /^\+(?:[0-9]?){6,14}[0-9]$/.test(text);
-  let code = null;
-
-  if (hasValidCountryCode) {
-    // Assumptions
-    // 1. At most the first three characters are the code
-    // 2. Let's calculate the size of the string without 3 numbers
-    // 3. If the string without the three numbers is invalid, then the code is two numbers long
-    // 4. Else the number is three numbers long
-    const codeMatch = text.match(/^\+([0-9]?){1,3}/);
-    if (codeMatch?.length) {
-      code = codeMatch[0];
-    }
-  }
-
-  return {
+  const result: SmartPaste = {
     formatted: text,
-    country_code: code,
+    dial_code_subsets: [],
   };
-}
 
-function replaceAll(str: string, find: string | RegExp, replace: string) {
-  return str.replace(new RegExp(find, 'g'), replace);
+  // Generate dial code subsets if input starts with '+' followed by digits
+  const dialCodeMatch = text.match(/^\+(\d{1,})$/);
+  if (Array.isArray(dialCodeMatch) && typeof dialCodeMatch[1] === "string") {
+    result.dial_code_subsets = getDialCodeSubsets(dialCodeMatch[1]);
+  }
+
+  return result;
 }

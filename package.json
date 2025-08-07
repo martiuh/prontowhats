@@ -16,12 +16,12 @@
   "license": "MIT",
   "dependencies": {
     "@astrojs/node": "^9.3.3",
-    "@astrojs/tailwind": "^6.0.2",
     "@fortawesome/fontawesome-free": "^7.0.0",
+    "@tailwindcss/vite": "^4.1.11",
     "@types/google.analytics": "^0.0.41",
     "@types/gtag.js": "^0.0.4",
     "astro": "^5.12.8",
-    "tailwindcss": "^3.4.15"
+    "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
     "@testing-library/dom": "^10.4.0",

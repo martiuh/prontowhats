@@ -1,6 +1,7 @@
 ---
 // WhatsApp form component converted from form.pug
 import CountrySelect from "./CountrySelect.astro";
+import CountrySuggest from "./CountrySuggest.astro";
 ---
 
 <div class="w-full max-w-xs pt-6">
@@ -17,6 +18,10 @@ import CountrySelect from "./CountrySelect.astro";
     </div>
 
     <div class="mb-4">
+      <CountrySuggest />
+    </div>
+
+    <div class="mb-4">
       <label for="tel" class="block text-grey-darkest text-sm font-bold mb-3"
         >Teléfono*</label
       >
@@ -28,6 +33,11 @@ import CountrySelect from "./CountrySelect.astro";
         required
         data-testid="tel-input"
       />
+      <p class="text-xs text-gray-600 mt-2">
+        Formatos soportados:
+        <span class="italic"> +5244103500, 99-55-12-300 o 5510030095</span> y otros
+        tipos
+      </p>
     </div>
 
     <div class="mb-4">

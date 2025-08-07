@@ -1,15 +1,16 @@
-import { track } from './track';
-import { extendTelField } from './extenders/smartPaste/extendTelField';
+import { track } from "./track";
+import { extendTelField } from "./extenders/smartPaste/extendTelField";
+import { loadCountryCodes } from "./stores/country-codes";
 
 declare var SEND_MESSAGE: boolean;
 
 // Wait for DOM to be fully loaded
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   let countrySelectValid = false;
   let telInputValid = false;
 
-  const countrySelect = document.getElementById('country') as HTMLSelectElement;
-  countrySelect.addEventListener('change', () => {
+  const countrySelect = document.getElementById("country") as HTMLSelectElement;
+  countrySelect.addEventListener("change", () => {
     if (countrySelect.checkValidity()) {
       countrySelectValid = true;
     }
@@ -18,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Auto-detect country based on IP
   (async function setCountryCode() {
     try {
-      const data = await fetch('https://ipapi.co/json').then((res) =>
+      const data = await fetch("https://ipapi.co/json").then((res) =>
         res.json()
       );
       const code = data?.country_code;
@@ -26,27 +27,29 @@ document.addEventListener('DOMContentLoaded', () => {
         countrySelect.value = code;
       }
     } catch (error) {
-      console.error('Error fetching IP information');
+      console.error("Error fetching IP information");
     }
   })();
 
-  const telInput = document.getElementById('tel') as HTMLInputElement;
+  loadCountryCodes();
+
+  const telInput = document.getElementById("tel") as HTMLInputElement;
   extendTelField(telInput);
 
-  const sendWhatsForm = document.getElementById('send-form') as HTMLFormElement;
+  const sendWhatsForm = document.getElementById("send-form") as HTMLFormElement;
   const submitButton = document.getElementById(
-    'submit-btn'
+    "submit-btn"
   ) as HTMLButtonElement;
 
-  const messageArea = document.getElementById('message') as HTMLTextAreaElement;
+  const messageArea = document.getElementById("message") as HTMLTextAreaElement;
 
-  messageArea.addEventListener('keydown', (event) => {
-    if ((event.ctrlKey || event.metaKey) && event.code === 'Enter') {
+  messageArea.addEventListener("keydown", (event) => {
+    if ((event.ctrlKey || event.metaKey) && event.code === "Enter") {
       submitButton.click();
     }
   });
 
-  sendWhatsForm.addEventListener('submit', (event) => {
+  sendWhatsForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
     const countryCode = countrySelect.selectedOptions[0].dataset.code;
@@ -55,31 +58,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const telephone = telInput.value;
     const msg = messageArea.value;
 
-    const hasMsg = msg !== ' ';
-    const message = hasMsg ? `?text=${encodeURI(`${msg}`)}` : '';
+    const hasMsg = msg !== " ";
+    const message = hasMsg ? `?text=${encodeURI(`${msg}`)}` : "";
 
     if (hasMsg) {
-      track('select_content', {
-        content_type: 'with_message',
-        item_id: '1111',
+      track("select_content", {
+        content_type: "with_message",
+        item_id: "1111",
       });
     }
 
     const whatsAppString = `https://wa.me/${countryCode}${telephone}/${message}`;
 
-    track('select_content', { content_type: 'country', item_id: countryName });
+    track("select_content", { content_type: "country", item_id: countryName });
 
     if (!SEND_MESSAGE) {
-      console.log('SEND', whatsAppString);
+      console.log("SEND", whatsAppString);
       return;
     }
 
     window.location.href = whatsAppString;
   });
 
-  sendWhatsForm.addEventListener('change', () => {
+  sendWhatsForm.addEventListener("change", () => {
     if (telInputValid && countrySelectValid) {
-      submitButton.removeAttribute('disabled');
+      submitButton.removeAttribute("disabled");
     }
   });
 });

@@ -1,4 +1,6 @@
 ---
+import "../styles/main.css";
+
 export interface Props {
   title: string;
   gtag?: string | undefined;
@@ -34,7 +36,3 @@ const { title, gtag } = Astro.props;
     <slot />
   </body>
 </html>
-
-<style>
-  @import '../styles/main.css';
-</style>
