@@ -52,8 +52,9 @@ document.addEventListener("DOMContentLoaded", () => {
   sendWhatsForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    const countryCode = countrySelect.selectedOptions[0].dataset.code;
-    const countryName = countrySelect.selectedOptions[0].dataset.name;
+    const selectedOption = countrySelect.selectedOptions[0];
+    const countryCode = selectedOption?.dataset?.code ?? "";
+    const countryName = selectedOption?.dataset?.name ?? "";
 
     const telephone = telInput.value;
     const msg = messageArea.value;
@@ -61,16 +62,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const hasMsg = msg !== " ";
     const message = hasMsg ? `?text=${encodeURI(`${msg}`)}` : "";
 
-    if (hasMsg) {
-      track("select_content", {
-        content_type: "with_message",
-        item_id: "1111",
-      });
-    }
-
     const whatsAppString = `https://wa.me/${countryCode}${telephone}/${message}`;
 
-    track("select_content", { content_type: "country", item_id: countryName });
+    track("select_content", {
+      content_type: "country",
+      label: hasMsg ? "with_msg" : "regular",
+      value: countryName,
+    });
 
     if (!SEND_MESSAGE) {
       console.log("SEND", whatsAppString);

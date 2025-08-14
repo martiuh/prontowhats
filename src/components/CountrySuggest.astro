@@ -17,6 +17,7 @@
 <script>
   import { getFlag } from "@/lib/countries";
   import { countryCodes, type CountryData } from "@/lib/stores/country-codes";
+  import { track } from "@/lib/track";
 
   const container = document.getElementById(
     "country-suggest-container"
@@ -48,6 +49,11 @@
       const telInputValue = telInput.value;
       telInput.value = telInputValue.replace(country.dial_code, "");
       const focusEvent = new Event("focus", {});
+      track("suggestion_select", {
+        content_type: "country",
+        label: "Suggestion button clicked",
+        value: country.name_en,
+      });
       telInput.dispatchEvent(focusEvent);
       hideCountrySuggestions();
     });
