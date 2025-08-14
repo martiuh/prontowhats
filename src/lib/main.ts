@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
     track("select_content", {
       content_type: "country",
       label: hasMsg ? "with_msg" : "regular",
-      value: countryName,
+      country_name: countryName,
     });
 
     if (!SEND_MESSAGE) {

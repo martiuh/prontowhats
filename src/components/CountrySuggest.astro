@@ -52,7 +52,7 @@
       track("suggestion_select", {
         content_type: "country",
         label: "Suggestion button clicked",
-        value: country.name_en,
+        country_name: country.name_en,
       });
       telInput.dispatchEvent(focusEvent);
       hideCountrySuggestions();
