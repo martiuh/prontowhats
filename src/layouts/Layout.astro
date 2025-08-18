@@ -3,10 +3,10 @@ import "../styles/main.css";
 
 export interface Props {
   title: string;
-  gtag?: string | undefined;
 }
 
-const { title, gtag } = Astro.props;
+const { title } = Astro.props;
+const GTAG = process.env.GTAG;
 ---
 
 <!DOCTYPE html>
@@ -19,15 +19,15 @@ const { title, gtag } = Astro.props;
     <link rel="short icon" href="/assets/img/smartphone-icon.png" />
     <link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon.png" />
     
-    {gtag && (
+    {GTAG && (
       <>
         <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script src={`https://www.googletagmanager.com/gtag/js?id=${gtag}`} async></script>
-        <script is:inline define:vars={{ gtag }}>
+        <script src={`https://www.googletagmanager.com/gtag/js?id=${GTAG}`} async></script>
+        <script is:inline define:vars={{ GTAG }}>
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', gtag);
+          gtag('config', GTAG);
         </script>
       </>
     )}

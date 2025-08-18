@@ -2,12 +2,9 @@
 import Layout from "../layouts/Layout.astro";
 import Navigation from "../components/Navigation.astro";
 import WhatsAppForm from "../components/WhatsAppForm.astro";
-
-// Get gtag from environment variable if available
-const gtag = process.env.GTAG;
 ---
 
-<Layout title="Prontowhats - Rápido y directo" gtag={gtag}>
+<Layout title="Prontowhats - Rápido y directo">
   <Navigation />
   <main>
     <div class="pt-10 px-2 flex flex-col items-center">
