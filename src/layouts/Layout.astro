@@ -20,16 +20,14 @@ const GTAG = process.env.GTAG;
     <link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon.png" />
     
     {GTAG && (
-      <>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script src={`https://www.googletagmanager.com/gtag/js?id=${GTAG}`} async></script>
-        <script is:inline define:vars={{ GTAG }}>
+        <script is:inline src={`https://www.googletagmanager.com/gtag/js?id=${GTAG}`} async></script>
+        <script is:inline type="application/javascript" define:vars={{ GTAG }}>
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
           gtag('config', GTAG);
+          window.gtag = gtag;
         </script>
-      </>
     )}
   </head>
   <body class="h-screen max-h-screen max-w-screen w-screen bg-emerald-300">
